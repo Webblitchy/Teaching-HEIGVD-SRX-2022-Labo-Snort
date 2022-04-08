@@ -351,7 +351,9 @@ Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxx
 
 ---
 
-**Réponse :**  
+Les préprocesseurs sont des modules d’extension pour arranger ou modifier les paquets de données
+avant que le moteur de détection n’intervienne. Certains préprocesseurs détectent aussi des anomalies
+dans les entêtes des paquets et génèrent alors des alertes.
 
 ---
 
@@ -359,7 +361,7 @@ Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxx
 
 ---
 
-**Réponse :**  
+Car nous n'avons pas configuré de préprocesseur dans notre configuration "fait-maison"
 
 ---
 
@@ -375,7 +377,7 @@ alert tcp any any -> any any (msg:"Mon nom!"; content:"Rubinstein"; sid:4000015;
 
 ---
 
-**Réponse :**  
+Pour tous les paquets tcp de partout à partout, il donne l'alert "Mon nom!" lorsque le contenu "Rubinstein" est détecté
 
 ---
 
