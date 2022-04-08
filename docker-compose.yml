@@ -5,7 +5,7 @@ services:
         hostname: 'IDS'
         privileged: true
         container_name : IDS
-        build: .
+        build: Dockerfile_IDS/
         cap_add : 
             - NET_ADMIN 
         stdin_open: true
@@ -29,7 +29,7 @@ services:
         hostname: 'Client'
         privileged: true
         container_name : Client
-        build: .
+        build: Dockerfile_client/
         cap_add : 
             - NET_ADMIN
         depends_on: 
@@ -48,7 +48,8 @@ services:
             net.ipv4.conf.eth0.send_redirects: '0'
 
     wireshark:
-        image: lscr.io/linuxserver/wireshark
+        # image: lscr.io/linuxserver/wireshark
+        build: Dockerfile_firefox/
         container_name: wireshark
         cap_add:
             - NET_ADMIN
