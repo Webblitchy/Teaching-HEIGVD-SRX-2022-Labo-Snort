@@ -21,4 +21,7 @@ nft 'add chain nat postrouting { type nat hook postrouting priority 100 ; }'
 nft add rule nat postrouting meta oifname "eth0" masquerade
 apt install snort
 echo "include /etc/snort/rules/icmp2.rules" > /etc/snort/mysnort.conf
-echo "alert icmp any any -> any any (msg:"ICMP Packet"; sid:4000001; rev:3;)" > /etc/snort/rules/icmp2.rules
+echo 'alert icmp any any -> any any (msg:"ICMP Packet"; sid:4000001; rev:3;)' > /etc/snort/rules/icmp2.rules
+echo 'alert tcp any any -> any any (msg:"Nos noms!"; content:"HEIG-VD"; sid:4000015; rev:1;)' > /root/myrules.rules
+
+# Ce qu'on fait depuis client : wget iese.heig-vd.ch
