@@ -638,6 +638,38 @@ Ecrire deux règles qui journalisent (sans alerter) chacune un message à chaque
 
 **Réponse :**  
 
+```
+var WIKIPEDIA_IP 91.198.174.192
+var CLIENT_IP 192.168.220.3
+var FIREFOX_IP 192.168.220.4
+var WEB_PORTS [80,443]
+
+log tcp $CLIENT_IP any -> any $WEB_PORTS (msg:"Connexion à wikipedia depuis la machine client"; sid:400000001; rev:1;)
+log tcp $FIREFOX_IP any -> any $WEB_PORTS (msg:"Connexion à wikipedia depuis la machine firefox"; sid:400000002; rev:1;)
+```
+Notre règle journalise les connexions à Wikipedia depuis la machine client et depuis la machine firefox.
+Elle utilise l'adresse du site wikipedia.org.
+
+Le message ne sera pas journalisé dans les logs, mais il est quand même utile pour comprendre ce que fait la règle.
+Dans les logs on peut simplement voir qu'il y a eu un accès à wikipedia depuis la machine client ou firefox:
+(on peut afficher le contenu du fichier avec `tcpdump -r /var/log/snort/snort.log.1651225023`)
+
+Voici le contenu du fichier de log dans "/var/log/snort/snort.log.1651225023":
+
+``` 
+reading from file /var/log/snort/snort.log.1651225023, link-type EN10MB (Ethernet), snapshot length 1514
+09:37:12.333483 IP Client.snortlan.47836 > text-lb.esams.wikimedia.org.https: Flags [R], seq 4171324781, win 0, length 0
+09:37:12.333499 IP Client.snortlan.47836 > text-lb.esams.wikimedia.org.https: Flags [R], seq 4171324781, win 0, length 0
+09:37:12.440697 IP Client.snortlan.47838 > text-lb.esams.wikimedia.org.https: Flags [R], seq 4097727664, win 0, length 0
+09:37:12.441379 IP Client.snortlan.47838 > text-lb.esams.wikimedia.org.https: Flags [R], seq 4097727664, win 0, length 0
+```
+On voit les logs qui indiquent que le client a été détecté
+
+TODO : vérifier avec Firefox
+
+
+
+
 ---
 
 --
