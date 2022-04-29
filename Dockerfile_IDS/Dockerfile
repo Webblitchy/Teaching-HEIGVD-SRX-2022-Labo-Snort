@@ -14,7 +14,13 @@ RUN passwd -d root
 
 RUN apt install snort -y
 
-USER root
+# COPY setupIDS.sh /opt/setupIDS.sh
+
+# WORKDIR /opt
+
+# RUN chmod +x setupIDS.sh
+# RUN ./setupIDS.sh
+#USER 0
 
 #RUN ["/bin/bash", "-c", "nft add table nat"]
 # RUN nft add table nat
