@@ -691,13 +691,13 @@ TODO : vérifier avec Firefox
 ### Détecter un ping d'un autre système
 
 Ecrire une règle qui alerte à chaque fois que votre machine IDS **reçoit** un ping depuis une autre machine (n'import laquelle des autres machines de votre réseau). Assurez-vous que **ça n'alerte pas** quand c'est vous qui **envoyez** le ping depuis l'IDS vers un autre système !
-TODO: à vérifier
-`alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; sid:4000001; rev:1;)`
 **Question 9: Quelle est votre règle ?**
 
 ---
 
 **Réponse :**  
+TODO: à vérifier
+`alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; sid:4000001; rev:1;)`
 
 ---
 
