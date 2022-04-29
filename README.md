@@ -413,7 +413,99 @@ Arrêter Snort avec `CTRL-C`.
 
 ---
 
-**Réponse :**  
+**Réponse :**
+```bash
+===============================================================================
+Run time for packet processing was 40.46377 seconds
+Snort processed 121 packets.
+Snort ran for 0 days 0 hours 0 minutes 40 seconds
+   Pkts/sec:            3
+===============================================================================
+Memory usage summary:
+  Total non-mmapped bytes (arena):       4096000
+  Bytes in mapped regions (hblkhd):      30265344
+  Total allocated space (uordblks):      3348160
+  Total free space (fordblks):           747840
+  Topmost releasable block (keepcost):   590400
+===============================================================================
+Packet I/O Totals:
+   Received:          126
+   Analyzed:          121 ( 96.032%)
+    Dropped:            0 (  0.000%)
+   Filtered:            0 (  0.000%)
+Outstanding:            5 (  3.968%)
+   Injected:            0
+===============================================================================
+Breakdown by protocol (includes rebuilt packets):
+        Eth:          121 (100.000%)
+       VLAN:            0 (  0.000%)
+        IP4:          121 (100.000%)
+       Frag:            0 (  0.000%)
+       ICMP:            0 (  0.000%)
+        UDP:            9 (  7.438%)
+        TCP:          112 ( 92.562%)
+        IP6:            0 (  0.000%)
+    IP6 Ext:            0 (  0.000%)
+   IP6 Opts:            0 (  0.000%)
+      Frag6:            0 (  0.000%)
+      ICMP6:            0 (  0.000%)
+       UDP6:            0 (  0.000%)
+       TCP6:            0 (  0.000%)
+     Teredo:            0 (  0.000%)
+    ICMP-IP:            0 (  0.000%)
+    IP4/IP4:            0 (  0.000%)
+    IP4/IP6:            0 (  0.000%)
+    IP6/IP4:            0 (  0.000%)
+    IP6/IP6:            0 (  0.000%)
+        GRE:            0 (  0.000%)
+    GRE Eth:            0 (  0.000%)
+   GRE VLAN:            0 (  0.000%)
+    GRE IP4:            0 (  0.000%)
+    GRE IP6:            0 (  0.000%)
+GRE IP6 Ext:            0 (  0.000%)
+   GRE PPTP:            0 (  0.000%)
+    GRE ARP:            0 (  0.000%)
+    GRE IPX:            0 (  0.000%)
+   GRE Loop:            0 (  0.000%)
+       MPLS:            0 (  0.000%)
+        ARP:            0 (  0.000%)
+        IPX:            0 (  0.000%)
+   Eth Loop:            0 (  0.000%)
+   Eth Disc:            0 (  0.000%)
+   IP4 Disc:            0 (  0.000%)
+   IP6 Disc:            0 (  0.000%)
+   TCP Disc:            0 (  0.000%)
+   UDP Disc:            0 (  0.000%)
+  ICMP Disc:            0 (  0.000%)
+All Discard:            0 (  0.000%)
+      Other:            0 (  0.000%)
+Bad Chk Sum:           55 ( 45.455%)
+    Bad TTL:            0 (  0.000%)
+     S5 G 1:            0 (  0.000%)
+     S5 G 2:            0 (  0.000%)
+      Total:          121
+===============================================================================
+Action Stats:
+     Alerts:            8 (  6.612%)
+     Logged:            8 (  6.612%)
+     Passed:            0 (  0.000%)
+Limits:
+      Match:            0
+      Queue:            0
+        Log:            0
+      Event:            0
+      Alert:            0
+Verdicts:
+      Allow:          121 ( 96.032%)
+      Block:            0 (  0.000%)
+    Replace:            0 (  0.000%)
+  Whitelist:            0 (  0.000%)
+  Blacklist:            0 (  0.000%)
+     Ignore:            0 (  0.000%)
+      Retry:            0 (  0.000%)
+===============================================================================
+```
+Ce tableau présente les statistiques des traitements et effectués lorsque Snort fonctionnait. Ici nous voyons que 8 alertes ont été levées et mises dans les logs.
 
 ---
 
@@ -424,7 +516,7 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 
 ---
 
-**Réponse :**  
+**Réponse :**
 
 ---
 
