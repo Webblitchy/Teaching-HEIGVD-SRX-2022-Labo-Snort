@@ -515,13 +515,10 @@ Arrêter Snort avec `CTRL-C`.
 
 ---
 
-<<<<<<< HEAD
 **Réponse :**  
 En faisant un `CTRL-C` dans le terminal, le processus s'arrête mais n'affiche rien. Il faut refaire une requête depuis le client pour que le terminal mette l'affichage à jour.
 Une fois l'affichage à jour, il affiche ceci :
 
-=======
-**Réponse :**
 ```bash
 ===============================================================================
 Run time for packet processing was 40.46377 seconds
@@ -614,7 +611,6 @@ Verdicts:
 ===============================================================================
 ```
 Ce tableau présente les statistiques des traitements et effectués lorsque Snort fonctionnait. Ici nous voyons que 8 alertes ont été levées et mises dans les logs.
->>>>>>> 5238e21bbb0399988450acb0187f03d2769f472d
 
 ---
 
