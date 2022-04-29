@@ -393,6 +393,102 @@ sudo snort -c myrules.rules -i eth0
 
 **Réponse :**  
 
+Message affiché
+```
+Running in IDS mode
+
+        --== Initializing Snort ==--
+Initializing Output Plugins!
+Initializing Preprocessors!
+Initializing Plug-ins!
+Parsing Rules file "/root/myrules.rules"
+Tagged Packet Limit: 256
+Log directory = /var/log/snort
+
++++++++++++++++++++++++++++++++++++++++++++++++++++
+Initializing rule chains...
+1 Snort rules read
+    1 detection rules
+    0 decoder rules
+    0 preprocessor rules
+1 Option Chains linked into 1 Chain Headers
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
++-------------------[Rule Port Counts]---------------------------------------
+|             tcp     udp    icmp      ip
+|     src       0       0       0       0
+|     dst       0       0       0       0
+|     any       1       0       0       0
+|      nc       0       0       0       0
+|     s+d       0       0       0       0
++----------------------------------------------------------------------------
+
++-----------------------[detection-filter-config]------------------------------
+| memory-cap : 1048576 bytes
++-----------------------[detection-filter-rules]-------------------------------
+| none
+-------------------------------------------------------------------------------
+
++-----------------------[rate-filter-config]-----------------------------------
+| memory-cap : 1048576 bytes
++-----------------------[rate-filter-rules]------------------------------------
+| none
+-------------------------------------------------------------------------------
+
++-----------------------[event-filter-config]----------------------------------
+| memory-cap : 1048576 bytes
++-----------------------[event-filter-global]----------------------------------
++-----------------------[event-filter-local]-----------------------------------
+| none
++-----------------------[suppression]------------------------------------------
+| none
+-------------------------------------------------------------------------------
+Rule application order: pass->drop->sdrop->reject->alert->log
+Verifying Preprocessor Configurations!
+
+[ Port Based Pattern Matching Memory ]
++-[AC-BNFA Search Info Summary]------------------------------
+| Instances        : 1
+| Patterns         : 1
+| Pattern Chars    : 8
+| Num States       : 8
+| Num Match States : 1
+| Memory           :   1.62Kbytes
+|   Patterns       :   0.05K
+|   Match Lists    :   0.09K
+|   Transitions    :   1.09K
++-------------------------------------------------
+pcap DAQ configured to passive.
+Acquiring network traffic from "eth0".
+Reload thread starting...
+Reload thread started, thread 0x7f0237887640 (29)
+Decoding Ethernet
+
+        --== Initialization Complete ==--
+
+   ,,_     -*> Snort! <*-
+  o"  )~   Version 2.9.15.1 GRE (Build 15125) 
+   ''''    By Martin Roesch & The Snort Team: http://www.snort.org/contact#team
+           Copyright (C) 2014-2019 Cisco and/or its affiliates. All rights reserved.
+           Copyright (C) 1998-2013 Sourcefire, Inc., et al.
+           Using libpcap version 1.10.1 (with TPACKET_V3)
+           Using PCRE version: 8.39 2016-06-14
+           Using ZLIB version: 1.2.11
+
+Commencing packet processing (pid=28)
+
+```
+
+On peut noter les informations pertinentes suivantes:
+- Snort fonctionne en mode IDS
+- Snort est lancé avec le fichier de règles `myrules.rules`
+- Les logs sont stockés dans `/var/log/snort`
+- Il y a une règle définie
+    - C'est une règle de détection
+    - Elle vérifie les paquets entrants et sortant de type TCP
+- Il n'y a pas de filtre
+- Il n'y a pas de préprocesseur
+
 ---
 
 Aller à un site web contenant dans son text la phrase ou le mot clé que vous avez choisi (il faudra chercher un peu pour trouver un site en http... Si vous n'y arrivez pas, vous pouvez utiliser [http://neverssl.com](http://neverssl.com) et modifier votre votre règle pour détecter un morceau de text contenu dans le site).
@@ -404,6 +500,12 @@ Pour accéder à Firefox dans son conteneur, ouvrez votre navigateur web sur vot
 ---
 
 **Réponse :**  
+Le terminal nous affiche simplement le message suivant répété plusieurs fois :
+```
+WARNING: No preprocessors configured for policy 0.
+```
+
+Il indique ceci car il n'y a pas de préprocesseur configuré pour la règle.
 
 ---
 
@@ -414,6 +516,9 @@ Arrêter Snort avec `CTRL-C`.
 ---
 
 **Réponse :**  
+En faisant un `CTRL-C` dans le terminal, le processus s'arrête mais n'affiche rien. Il faut refaire une requête depuis le client pour que le terminal mette l'affichage à jour.
+Une fois l'affichage à jour, il affiche ceci :
+
 
 ---
 
@@ -678,3 +783,4 @@ Pour nettoyer votre système et effacer les fichiers générés par Docker, vous
 
 
 <sub>This guide draws heavily on http://cs.mvnu.edu/twiki/bin/view/Main/CisLab82014</sub>
+
