@@ -622,6 +622,20 @@ Aller au répertoire /var/log/snort. Ouvrir le fichier `alert`. Vérifier qu'il 
 ---
 
 **Réponse :**
+Voici un exemple d'alerte :
+
+Règle : `alert tcp any any -> any any (msg:"HEIG-VD detected"; content:"HEIG-VD"; sid:4000015; rev:1;)`
+
+```bash
+[**] [1:4000015:1] HEIG-VD detected [**]
+[Priority: 0]
+04/29-08:55:10.970647 193.134.220.45:80 -> 192.168.220.3:52066
+TCP TTL:36 TOS:0x0 ID:50279 IpLen:20 DgmLen:1500
+***AP*** Seq: 0x1AFF6DDA  Ack: 0x46243E63  Win: 0xFFFF  TcpLen: 20
+```
+La première ligne indique l'identifiant de la règle (sid) et sa version (1), ainsi que le message d'alerte.
+La deuxième ligne indique la priorité, ici la priorité par défaut.
+La troisième ligne indique la date de l'alerte ainsi que les IP source et destination. Ici, la source est le serveur web qui a répondu en envoyant une page qui contenait les mots clefs qui ont levé l'alerte. A noter que l'année de l'alerte n'est pas précisée.
 
 ---
 
