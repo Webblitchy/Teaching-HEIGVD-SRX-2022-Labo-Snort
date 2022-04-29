@@ -23,5 +23,10 @@ apt install snort
 echo "include /etc/snort/rules/icmp2.rules" > /etc/snort/mysnort.conf
 echo 'alert icmp any any -> any any (msg:"ICMP Packet"; sid:4000001; rev:3;)' > /etc/snort/rules/icmp2.rules
 echo 'alert tcp any any -> any any (msg:"HEIG-VD detected"; content:"HEIG-VD"; sid:4000015; rev:1;)' > /root/myrules.rules
+echo 'alert tcp any any -> any any (msg:"HEIG-VD detected"; content:"HEIG-VD"; sid:4000015; rev:1;)' >> /root/myrules.rules
+
+var LOCAL_NET 192.168.220.0/24
+var LOCALHOST 192.168.220.2
+echo 'alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; sid:4000001; rev:1;)' >> /root/myrules.rules
 
 # Ce qu'on fait depuis client : wget iese.heig-vd.ch
