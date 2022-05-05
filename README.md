@@ -787,14 +787,16 @@ La règle détecte les tentatives de connexion SSH depuis la machine client vers
 
 ---
 
-**Réponse :**  
-
+**Réponse :** 
+ 
+```
 [**] [1:40000005:1] SSH connexion attempt detected [**]
 [Priority: 0] 
 05/05-20:22:45.618181 192.168.220.3:51646 -> 192.168.220.2:22
 TCP TTL:64 TOS:0x10 ID:44221 IpLen:20 DgmLen:60 DF
 ******S* Seq: 0x70D27C9D  Ack: 0x0  Win: 0xFAF0  TcpLen: 40
 TCP Options (5) => MSS: 1460 SackOK TS: 1059687740 0 NOP WS: 7 
+```
 
 ---
 
