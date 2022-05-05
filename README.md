@@ -341,7 +341,7 @@ tcpdump -r /var/log/snort/snort.log.xxxxxxxxxx
 
 Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxxxxxxx comme source d'analyse por Snort.
 
-## Exercises
+## Exercices
 
 **Réaliser des captures d'écran des exercices suivants et les ajouter à vos réponses.**
 
@@ -351,8 +351,7 @@ Vous pouvez aussi utiliser des captures Wireshark ou des fichiers snort.log.xxxx
 
 ---
 
-Les préprocesseurs sont des modules d’extension pour arranger ou modifier les paquets de données
-avant que le moteur de détection n’intervienne. Certains préprocesseurs détectent aussi des anomalies
+Les préprocesseurs sont des modules d’extension pour arranger ou modifier les paquets de données avant que le moteur de détection n’intervienne. Certains préprocesseurs détectent aussi des anomalies
 dans les entêtes des paquets et génèrent alors des alertes.
 
 ---
@@ -723,6 +722,7 @@ alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detect
 ---
 
 **Réponse :**  
+Le fichier est journalisé dans "/var/log/snort/snort.log.xxxxxx"
 
 ---
 
@@ -748,6 +748,14 @@ Faites le nécessaire pour que les pings soient détectés dans les deux sens.
 
 **Réponse :**  
 
+Il faut changer le type de flèche dans la règle. Remplacer `->` par `<>`
+
+```
+var LOCAL_NET 192.168.220.0/24
+var LOCALHOST 192.168.220.2
+alert icmp $LOCAL_NET any <> $LOCALHOST any (msg:"Ping from local network detected"; itype:8; sid:4000001; rev:1;)
+```
+
 ---
 
 
@@ -755,13 +763,20 @@ Faites le nécessaire pour que les pings soient détectés dans les deux sens.
 
 ### Detecter une tentative de login SSH
 
-Essayer d'écrire une règle qui Alerte qu'une tentative de session SSH a été faite depuis la machine Client sur l'IDS.
+Essayer d'écrire une règle qui alerte qu'une tentative de session SSH a été faite depuis la machine Client sur l'IDS.
 
 **Question 14: Quelle est votre règle ? Montrer la règle et expliquer en détail comment elle fonctionne.**
 
 ---
 
 **Réponse :**  
+
+```
+CLIENT 192.168.220.3
+IDS 192.168.220.2
+alert tcp $CLIENT any -> $IDS 22 (msg:"SSH connexion attempt detected"; sid:40000005; rev:1;)
+```
+La règle détecte les tentatives de connexion SSH depuis la machine client vers l'IDS.
 
 ---
 
@@ -793,16 +808,31 @@ Générez du trafic depuis le deuxième terminal qui corresponde à l'une des r�
 ---
 
 **Réponse :**  
+On peut utiliser l'option `-r` pour lire un fichier pcap ou un fichier log, en utilisant la synthaxe suivante :
+
+```
+snort -r <fileName>.{pcap|log}
+```
 
 ---
 
 Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshark que vous venez de générer.
 
-**Question 17: Quelle est le comportement de Snort avec un fichier de capture ? Y-a-t'il une différence par rapport à l'analyse en temps réel ?**
+**Question 17: Quel est le comportement de Snort avec un fichier de capture ? Y-a-t'il une différence par rapport à l'analyse en temps réel ?**
 
 ---
 
 **Réponse :**  
+On peut utiliser les 2 modes pour faire de l'analyse de fichier de capture :
+- Mode sniffer (sans règles) sur un fichier de capture <br>
+  `snort -r <fichier>` <br>
+  Snort affiche simplement les paquets envoyés dans la console. mais ne génère aucun log.
+- Mode IDS sur un fichier de capture: <br>
+  `snort -c <règles> -r <fichier>` <br>
+  Snort agit comme en temps réel:
+  - Le fichier de capture est analysé et les alertes sont affichées dans la console
+  - les alertes et les logs sont enregistrés dans des fichiers.
+
 
 ---
 
@@ -811,6 +841,7 @@ Utiliser l'option correcte de Snort pour analyser le fichier de capture Wireshar
 ---
 
 **Réponse :**  
+Oui, comme dit avant, en utilisant le mode IDS avec l'option `-c`
 
 ---
 
@@ -825,7 +856,12 @@ Faire des recherches à propos des outils `fragroute` et `fragrouter`.
 ---
 
 **Réponse :**  
+Ce sont deux outils permettant de modifier des paquets inteceptés.
 
+`fragroute`:
+
+`fragrouter`:
+TODO
 ---
 
 
