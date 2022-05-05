@@ -858,14 +858,11 @@ Faire des recherches à propos des outils `fragroute` et `fragrouter`.
 ---
 
 **Réponse :**  
-Ce sont deux outils permettant de modifier des paquets inteceptés.
-TODO: Compléter ?
 `fragroute`:
-Cet outil permet d'intercepter et de modifier le trafic sortant à destination d'un hôte spécifique. Il est utilisé pour contourner les firwall et les IDSs.
+Cet outil permet d'intercepter et de modifier le trafic sortant à destination d'un hôte spécifique. Il est utilisé pour contourner les firwall et les IDSs. A la base, cet outil a été développé dans le but de tester plus en profondeur les infrastructtures réseau. `fragroute` permet par exemple de tester le bon fonctionnement d'un firewall statfull ou les timout de réassemblage des paquets par les IDS.
 
 `fragrouter`:
-TODO: Compléter ?
-C'est un framework ayant pour but de contourner les protections d'un système informatique.
+C'est un framework ayant permettant de faire du contournement de systèmes de protections tels que les firewall et les IDS.
 ---
 
 
@@ -874,16 +871,17 @@ C'est un framework ayant pour but de contourner les protections d'un système in
 ---
 
 **Réponse :**
-TODO:
-
+Ces outils utilisent la fragmentation IP pour tromper les IDS et les firewall. L'idée est de forcer artificiellement la fragmentation des paquets IP en morceaux plus petit, tel que le prévoit le protocole IP si le paquet IP rencontre un MTU trop petit sur son chemin. Cette fonctionnalité a été pensée à la base pour permettre le transit des données à travers des réseaux hétérogènes. Cependant, certains firewall et les IDS mal configurés ne gèrent pas correctement ces fragments de paquets IP. Dans ce cas, il est possible de contourner les règles de protection que ces équipements sont sensés assurer. `fragroute` utilise différente méthodes : retransmission des fragments IP dans un ordre aléatoire, suppression de paquets, retransmission avec différentes tailles de fragments ou encore duplication de fragments.
 ---
 
 
-**Question 21: Qu'est-ce que le `Frag3 Preprocessor` ? A quoi ça sert et comment ça fonctionne ?**
+**Question 21: Qu'est-ce que le `https://stackoverflow.com/questions/52411580/how-to-use-snort-to-detect-nmap-default-syn-scan` ? A quoi ça sert et comment ça fonctionne ?**
 
 ---
 
-**Réponse :**  
+**Réponse :**
+`Frag3 Preprocessor` détecte si des fragments IP transitent par le réseau. Il les garde en mémoire afin de les assembler et reformer le paquet IP original. L'IDS peut ensuite les analyser correctement et réagir en fonction des règles comme cela est attendu.
+
 
 ---
 
@@ -897,7 +895,7 @@ L'outil nmap propose une option qui fragmente les messages afin d'essayer de con
 
 ---
 
-**Réponse :**  
+**Réponse :** 
 
 ---
 
