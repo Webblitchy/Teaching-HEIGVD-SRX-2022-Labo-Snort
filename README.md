@@ -778,6 +778,8 @@ alert tcp $CLIENT any -> $IDS 22 (msg:"SSH connexion attempt detected"; sid:4000
 ```
 La règle détecte les tentatives de connexion SSH depuis la machine client vers l'IDS. Plus précisément, on se base ici sur le numéro de port qu'écoute ssh pour détecter des tentatives de connexion.
 
+> pour que cette règle fonctionne nous avons dû ajouter l'option `-k none` au lancement de snort pour désactiver le "checksum mode"
+
 ---
 
 
@@ -897,8 +899,11 @@ L'outil nmap propose une option qui fragmente les messages afin d'essayer de con
 
 ---
 
-**Réponse :**  
-
+**Réponse :**
+```
+var IDS 192.168.220.2
+alert tcp any any -> $IDS 22 (msg:"SYN packet detected on SSH port"; flags:S; sid:40000003; rev:1;)
+```
 ---
 
 
@@ -920,6 +925,8 @@ nmap -sS -f -p 22 --send-eth 192.168.220.2
 ---
 
 **Réponse :**  
+Avec l'option `-f` nmap fragmente les paquets envoyés.
+Snort ne détecte alors plus le SYN scan.
 
 ---
 
@@ -932,6 +939,24 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 ---
 
 **Réponse :**  
+Cette fois-ci la règle fonctionne et une alerte est lancée.
+
+```
+[**] [1:40000005:1] SSH connexion attempt detected [**]
+[Priority: 0] 
+05/05-20:10:17.727376 192.168.220.3:44031 -> 192.168.220.2:22
+TCP TTL:46 TOS:0x0 ID:6208 IpLen:20 DgmLen:44
+******S* Seq: 0x22BB80F  Ack: 0x0  Win: 0x400  TcpLen: 24
+TCP Options (1) => MSS: 1460 
+
+[**] [1:40000003:1] SYN packet detected on SSH port [**]
+[Priority: 0] 
+05/05-20:10:17.727376 192.168.220.3:44031 -> 192.168.220.2:22
+TCP TTL:46 TOS:0x0 ID:6208 IpLen:20 DgmLen:44
+******S* Seq: 0x22BB80F  Ack: 0x0  Win: 0x400  TcpLen: 24
+TCP Options (1) => MSS: 1460 
+
+```
 
 ---
 
@@ -941,6 +966,7 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 ---
 
 **Réponse :**  
+C'est un préprocesseur qui détecte les paquets chiffrés avec SSL/TLS avant que snort ne commence de les inspecter. Cela serait inutile car il est impossible de lire leur contenu.
 
 ---
 
@@ -950,6 +976,8 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 ---
 
 **Réponse :**  
+C'est un préprocesseur qui détecte les paquets contenant des informations personnelles sensibles. Ces données peuvent être des informations bancaires, des emails, numéros sociaux (américains) etc.
+Il est possible de déclancher des alertes et de masquer une partie des données.
 
 ---
 
@@ -961,6 +989,7 @@ Modifier le fichier `myrules.rules` pour que snort utiliser le `Frag3 Preprocess
 ---
 
 **Réponse :**  
+Snort est un outil très pratique pour détecter des comportements suspects sur un réseau. Il demande un certain temps d'apprentissage bien que la syntaxe ne soit pas spécialement compliquée.
 
 ---
 
