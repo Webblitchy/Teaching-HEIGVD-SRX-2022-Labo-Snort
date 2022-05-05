@@ -702,7 +702,7 @@ Ecrire une règle qui alerte à chaque fois que votre machine IDS **reçoit** un
 ```
 var LOCAL_NET 192.168.220.0/24
 var LOCALHOST 192.168.220.2
-alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; itype:8; sid:4000001; rev:1;)
+alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; itype:8; sid:4000003; rev:1;)
 ```
 ---
 
@@ -754,7 +754,7 @@ Il faut changer le type de flèche dans la règle. Remplacer `->` par `<>`
 ```
 var LOCAL_NET 192.168.220.0/24
 var LOCALHOST 192.168.220.2
-alert icmp $LOCAL_NET any <> $LOCALHOST any (msg:"Ping from local network detected"; itype:8; sid:4000001; rev:1;)
+alert icmp $LOCAL_NET any <> $LOCALHOST any (msg:"Ping from local network detected"; itype:8; sid:4000003; rev:1;)
 ```
 
 ---
@@ -775,7 +775,7 @@ Essayer d'écrire une règle qui alerte qu'une tentative de session SSH a été 
 ```
 var CLIENT 192.168.220.3
 var IDS 192.168.220.2
-alert tcp $CLIENT any -> $IDS 22 (msg:"SSH connexion attempt detected"; sid:40000005; rev:1;)
+alert tcp $CLIENT any -> $IDS 22 (msg:"SSH connexion attempt detected"; sid:40000004; rev:1;)
 ```
 La règle détecte les tentatives de connexion SSH depuis la machine client vers l'IDS. Plus précisément, on se base ici sur le numéro de port qu'écoute ssh pour détecter des tentatives de connexion.
 
@@ -870,11 +870,13 @@ Faire des recherches à propos des outils `fragroute` et `fragrouter`.
 ---
 
 **Réponse :**  
+
 `fragroute`:
-Cet outil permet d'intercepter et de modifier le trafic sortant à destination d'un hôte spécifique. Il est utilisé pour contourner les firwall et les IDSs. A la base, cet outil a été développé dans le but de tester plus en profondeur les infrastructtures réseau. `fragroute` permet par exemple de tester le bon fonctionnement d'un firewall statfull ou les timout de réassemblage des paquets par les IDS.
+Cet outil permet d'intercepter et de modifier le trafic sortant à destination d'un hôte spécifique. Il est utilisé pour contourner les firwall et les IDSs. A la base, cet outil a été développé dans le but de tester plus en profondeur les infrastructures réseau. `fragroute` permet par exemple de tester le bon fonctionnement d'un firewall statfull ou les timout de réassemblage des paquets par les IDS.
 
 `fragrouter`:
 C'est un framework ayant permettant de faire du contournement de systèmes de protections tels que les firewall et les IDS.
+
 ---
 
 
@@ -895,6 +897,7 @@ Ces outils utilisent la fragmentation IP pour tromper les IDS et les firewall. L
 ---
 
 **Réponse :**
+
 `Frag3 Preprocessor` détecte si des fragments IP transitent par le réseau. Il les garde en mémoire afin de les assembler et reformer le paquet IP original. L'IDS peut ensuite les analyser correctement et réagir en fonction des règles comme cela est attendu.
 
 
@@ -913,7 +916,7 @@ L'outil nmap propose une option qui fragmente les messages afin d'essayer de con
 **Réponse :**
 ```
 var IDS 192.168.220.2
-alert tcp any any -> $IDS 22 (msg:"SYN packet detected on SSH port"; flags:S; sid:40000003; rev:1;)
+alert tcp any any -> $IDS 22 (msg:"SYN packet detected on SSH port"; flags:S; sid:40000005; rev:1;)
 ```
 ---
 
