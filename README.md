@@ -729,6 +729,7 @@ Le fichier est journalisé dans "/var/log/snort/snort.log.xxxxxx"
 Les journaux sont générés en format pcap. Vous pouvez donc les lire avec Wireshark. Vous pouvez utiliser le conteneur wireshark en dirigeant le navigateur Web de votre hôte sur vers [http://localhost:3000](http://localhost:3000). Optionnellement, vous pouvez lire les fichiers log utilisant la commande `tshark -r nom_fichier_log` depuis votre IDS.
 
 **Question 12: Qu'est-ce qui a été journalisé ?**
+
 ---
 
 **Réponse :**  
