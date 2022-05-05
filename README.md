@@ -699,11 +699,10 @@ Ecrire une règle qui alerte à chaque fois que votre machine IDS **reçoit** un
 ---
 
 **Réponse :**  
-TODO: à vérifier
 ```
 var LOCAL_NET 192.168.220.0/24
 var LOCALHOST 192.168.220.2
-alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; sid:4000001; rev:1;)
+alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; itype:8; sid:4000001; rev:1;)
 ```
 ---
 
@@ -712,7 +711,8 @@ alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detect
 
 ---
 
-**Réponse :**  
+**Réponse :**
+Nous avons limité l'alerte à le demande d'echo en ajoutant `itype:8`. Ainsi, aucune alerte n'est levée lors d'une réponse à un ECHO envoyé par l'IDS.
 
 ---
 
@@ -729,10 +729,10 @@ Le fichier est journalisé dans "/var/log/snort/snort.log.xxxxxx"
 Les journaux sont générés en format pcap. Vous pouvez donc les lire avec Wireshark. Vous pouvez utiliser le conteneur wireshark en dirigeant le navigateur Web de votre hôte sur vers [http://localhost:3000](http://localhost:3000). Optionnellement, vous pouvez lire les fichiers log utilisant la commande `tshark -r nom_fichier_log` depuis votre IDS.
 
 **Question 12: Qu'est-ce qui a été journalisé ?**
-
 ---
 
 **Réponse :**  
+Uniquement les règles commançant par `log` ont été journalisées.
 
 ---
 
@@ -772,11 +772,11 @@ Essayer d'écrire une règle qui alerte qu'une tentative de session SSH a été 
 **Réponse :**  
 
 ```
-CLIENT 192.168.220.3
-IDS 192.168.220.2
+var CLIENT 192.168.220.3
+var IDS 192.168.220.2
 alert tcp $CLIENT any -> $IDS 22 (msg:"SSH connexion attempt detected"; sid:40000005; rev:1;)
 ```
-La règle détecte les tentatives de connexion SSH depuis la machine client vers l'IDS.
+La règle détecte les tentatives de connexion SSH depuis la machine client vers l'IDS. Plus précisément, on se base ici sur le numéro de port qu'écoute ssh pour détecter des tentatives de connexion.
 
 ---
 
@@ -788,6 +788,8 @@ La règle détecte les tentatives de connexion SSH depuis la machine client vers
 **Réponse :**  
 
 ---
+
+
 
 --
 
@@ -857,11 +859,13 @@ Faire des recherches à propos des outils `fragroute` et `fragrouter`.
 
 **Réponse :**  
 Ce sont deux outils permettant de modifier des paquets inteceptés.
-
+TODO: Compléter ?
 `fragroute`:
+Cet outil permet d'intercepter et de modifier le trafic sortant à destination d'un hôte spécifique. Il est utilisé pour contourner les firwall et les IDSs.
 
 `fragrouter`:
-TODO
+TODO: Compléter ?
+C'est un framework ayant pour but de contourner les protections d'un système informatique.
 ---
 
 
@@ -869,7 +873,8 @@ TODO
 
 ---
 
-**Réponse :**  
+**Réponse :**
+TODO:
 
 ---
 
