@@ -677,9 +677,13 @@ reading from file /var/log/snort/snort.log.1651225023, link-type EN10MB (Etherne
 09:37:12.440697 IP Client.snortlan.47838 > text-lb.esams.wikimedia.org.https: Flags [R], seq 4097727664, win 0, length 0
 09:37:12.441379 IP Client.snortlan.47838 > text-lb.esams.wikimedia.org.https: Flags [R], seq 4097727664, win 0, length 0
 ```
-On voit les logs qui indiquent que le client a été détecté
+On voit les logs qui indiquent que qu'une connexion à Wikipedia depuis `client` a été détectée.
 
-TODO : vérifier avec Firefox
+````
+reading from file /var/log/snort/snort.log.1651768073, link-type EN10MB (Ethernet), snapshot length 1514
+16:28:28.981143 IP firefox.snortlan.59760 > text-lb.esams.wikimedia.org.https: Flags [R], seq 870898746, win 0, length 0
+````
+On voit les logs qui indiquent que qu'une connexion à Wikipedia depuis `firefox` a été détectée.
 
 
 
@@ -697,8 +701,11 @@ Ecrire une règle qui alerte à chaque fois que votre machine IDS **reçoit** un
 
 **Réponse :**  
 TODO: à vérifier
-`alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; sid:4000001; rev:1;)`
-
+```
+var LOCAL_NET 192.168.220.0/24
+var LOCALHOST 192.168.220.2
+alert icmp $LOCAL_NET any -> $LOCALHOST any (msg:"Ping from local network detected"; sid:4000001; rev:1;)
+```
 ---
 
 
