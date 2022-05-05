@@ -788,7 +788,7 @@ La règle détecte les tentatives de connexion SSH depuis la machine client vers
 ---
 
 **Réponse :** 
- 
+
 ```
 [**] [1:40000005:1] SSH connexion attempt detected [**]
 [Priority: 0] 
@@ -882,8 +882,10 @@ C'est un framework ayant permettant de faire du contournement de systèmes de pr
 ---
 
 **Réponse :**
+
 Ces outils utilisent la fragmentation IP pour tromper les IDS et les firewall. L'idée est de forcer artificiellement la fragmentation des paquets IP en morceaux plus petit, tel que le prévoit le protocole IP si le paquet IP rencontre un MTU trop petit sur son chemin. Cette fonctionnalité a été pensée à la base pour permettre le transit des données à travers des réseaux hétérogènes. Cependant, certains firewall et les IDS mal configurés ne gèrent pas correctement ces fragments de paquets IP. Dans ce cas, il est possible de contourner les règles de protection que ces équipements sont sensés assurer. <br>
 `fragroute` utilise différentes méthodes : retransmission des fragments IP dans un ordre aléatoire, suppression de fragments, retransmission avec différentes tailles de fragments ou encore duplication de fragments. A noter que les fragments sont eux-mêmes des paquets IP valident.
+
 ---
 
 
